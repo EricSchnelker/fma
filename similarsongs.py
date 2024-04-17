@@ -5,31 +5,30 @@ import pandas as pd
 from pandastable import Table
 import tkinter as tk
 
-# deleted first row from dataset as multiindex data makes no sense in this context
+import time
+import os
 
-def display_df(df_name):
-    root = tk.Tk()
+import IPython.display as ipd
+from tqdm import tqdm_notebook
+import numpy as np
+import pandas as pd
+import keras
+from keras.layers import Activation, Dense, Conv1D, Conv2D, MaxPooling1D, Flatten, Reshape
 
-    frame = tk.Frame(root)
-    frame.pack(fill='both', expand=True)
+from sklearn.utils import shuffle
+from sklearn.preprocessing import MultiLabelBinarizer, LabelEncoder, LabelBinarizer, StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC, LinearSVC
+#from sklearn.gaussian_process import GaussianProcessClassifier
+#from sklearn.gaussian_process.kernels import RBF
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.multiclass import OneVsRestClassifier
 
-    pt = Table(frame, dataframe = df_name)
-    pt.show()
-
-    root.mainloop()
-
-class SimilarSongs():
-    # Load the dataset
-    tracks = pd.read_csv("./Data/tracks.csv", skipinitialspace=True)
-    tracks = tracks.loc[:, ~tracks.columns.str.contains('^Unnamed')]
-
-    # Get input
-    song_name = input("Please enter a song name (case sensitive): ")
-    
-    # Find the title(s) in dataset
-    found_rows = tracks.loc[tracks['title.1'] == song_name]
-
-    # Get all genres associated with the title(s)
-    top_genres = found_rows['genre_top']
+import utils
 
     
